@@ -2,10 +2,13 @@ from turtle import Screen
 from modules.game import *
 from modules.snake import *
 
-FOOD_NUMBER = 1
+FOOD_NUMBER = 5
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 600
+
 
 def window_setup(screen, snake):
-    screen.setup(width=600, height=600)
+    screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
     screen.bgcolor('black')
     screen.title('Snakezaum')
 
@@ -23,8 +26,7 @@ def main():
 
     window_setup(screen, snake)
 
-    game = Game(snake=snake, food_num=FOOD_NUMBER, screen=screen)
-
+    game = Game(snake=snake, food_num=FOOD_NUMBER, screen=screen, screen_dimensions=(SCREEN_WIDTH, SCREEN_HEIGHT))
     game.play()
 
     screen.exitonclick()
