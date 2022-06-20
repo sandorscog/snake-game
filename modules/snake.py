@@ -12,10 +12,19 @@ class Snake:
         self.segments = [Turtle(shape='square'), Turtle(shape='square'), Turtle(shape='square')]
         self.alive = True
 
+
+
         for index, segment in enumerate(self.segments):
             segment.penup()
             segment.goto(x=SNAKE_HEAD_POSITION[0] - (index * 20), y=SNAKE_HEAD_POSITION[1])
             segment.color('white')
+
+    def add_segment(self):
+        new_segment = Turtle(shape='square')
+        new_segment.penup()
+        new_segment.goto(self.segments[-1].position())
+        new_segment.color('white')
+        self.segments.append(new_segment)
 
     def move_forward(self):
         for index, segment in reversed(list(enumerate(self.segments))):
@@ -28,17 +37,20 @@ class Snake:
 
         self.segments[0].forward(20)
 
-    def check_collision(self):
-        for index, segment in enumerate(self.segments):
-            if index == 0:
-                continue
+    def check_collision(self, screen_dimensions: tuple = (0, 0)):
 
-            if segment.xcor() == self.segments[0].xcor() and segment.ycor() == self.segments[0].ycor():
+        # Body collision
+        for segment in self.segments[1:]:
+            if segment.distance(self.segments[0].xcor(), y=self.segments[0].ycor()) < 15:
                 self.alive = False
                 break
 
-    def add_segment(self):
-        pass
+        # Border collision
+        if self.segments[0].xcor() >= screen_dimensions[0] / 2 or self.segments[0].xcor() <= -screen_dimensions[0] / 2:
+            self.alive = False
+
+        if self.segments[0].ycor() >= screen_dimensions[1] / 2 or self.segments[0].ycor() <= -screen_dimensions[1] / 2:
+            self.alive = False
 
     def move_up(self):
         if self.segments[0].heading() != DOWN:
