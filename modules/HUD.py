@@ -5,7 +5,7 @@ class HUD(Turtle):
     def __init__(self, screen_dimensions: tuple = (0, 0)):
         super().__init__()
         self.score = 0
-        self.color('white')
+        self.color('red')
         self.penup()
         self.goto(x=0, y=screen_dimensions[1]/2 - 20)
         self.hideturtle()

@@ -9,15 +9,15 @@ RIGHT = 0
 
 class Snake:
     def __init__(self):
-        self.segments = [Turtle(shape='square'), Turtle(shape='square'), Turtle(shape='square')]
+        self.segments = [Turtle(shape='square')]
         self.alive = True
 
+        self.segments[0].penup()
+        self.segments[0].goto(x=0, y=0)
+        self.segments[0].color('gray')
 
-
-        for index, segment in enumerate(self.segments):
-            segment.penup()
-            segment.goto(x=SNAKE_HEAD_POSITION[0] - (index * 20), y=SNAKE_HEAD_POSITION[1])
-            segment.color('white')
+        self.add_segment()
+        self.add_segment()
 
     def add_segment(self):
         new_segment = Turtle(shape='square')
